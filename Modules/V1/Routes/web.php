@@ -10,7 +10,3 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::prefix('v1')->group(function() {
-    Route::get('/', 'V1Controller@index');
-});

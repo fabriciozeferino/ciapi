@@ -13,17 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('api')->get('/v1', function (Request $request) {
-    return 'Hello from CI API';
-});
 
 Route::group(
     [
-
         'middleware' => ['api']
-
     ],
     function () {
-        Route::post('project', 'Controller@store');
+        Route::post('webhook', 'WebhookController@handle');
     }
 );
