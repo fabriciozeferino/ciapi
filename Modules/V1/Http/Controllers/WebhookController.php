@@ -2,20 +2,27 @@
 
 namespace Modules\V1\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\V1\Service\WebhookFactory;
+
+use Illuminate\Http\Request;
+use Modules\V1\Service\WebhookService;
 
 
 class WebhookController extends Controller
 {
+    public $webhookService;
+
+    public function __construct(WebhookService $webhookService)
+    {
+        $this->webhookService = $webhookService;
+    }
+
     /**
      * Handle Request
      * @return Request
      */
     public function handle(Request $request)
     {
-        return (new WebhookFactory)->buildNotification($request);
+        return $this->webhookService->buildNotification($request);
     }
 }
