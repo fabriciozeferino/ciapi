@@ -23,6 +23,7 @@ class WebhookController extends Controller
      */
     public function handle(Request $request)
     {
+        
         return $this->webhookService->buildNotification($request);
     }
 }

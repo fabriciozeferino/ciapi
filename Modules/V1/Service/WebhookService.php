@@ -2,6 +2,8 @@
 
 namespace Modules\V1\Service;
 
+use Modules\V1\Exceptions\WebhookFailed;
+
 
 class WebhookService
 {
@@ -23,7 +25,7 @@ class WebhookService
                 break;
 
             default:
-                throw (new \Exception("Request factory could not create request of species" . $request->object_kind));
+                throw (new WebhookFailed("Request factory could not create request of species" . $request->object_kind));
                 break;
         }
         return $object;
@@ -31,11 +33,19 @@ class WebhookService
 
     public function buildNotification($request)
     {
-        $this->notification = $this->factory($request);
 
-        $this->notification->sendNotification();
+        try {
+            logger()->info($request);
 
-        dump($this->notification);
-        logger()->info('Notification ' . get_class($this->notification) . ' requested.');
+            $this->notification = $this->factory($request);
+
+            $this->notification->sendNotification();
+
+            dump($this->notification);
+
+            logger()->info('Notification ' . get_class($this->notification) . ' requested.');
+        } catch (WebhookFailed $th) {
+            throw new WebhookFailed('API faild');
+        }
     }
 }

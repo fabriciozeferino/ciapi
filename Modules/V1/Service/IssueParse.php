@@ -32,7 +32,7 @@ class IssueParse
 
         $this->assigned_to_avatar = $request->assignee['avatar_url'];
 
-        $this->updated_at = $request->changes['updated_at'];
+        //$this->updated_at = $request->changes['updated_at'];
 
         $this->changes = $request['changes'];
     }

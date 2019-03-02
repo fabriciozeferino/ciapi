@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+
 class userNotification extends Notification
 {
     use Queueable;
@@ -51,8 +52,6 @@ class userNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        return [];
     }
 }
